@@ -6,6 +6,6 @@ module.exports = {
 	},
 	
 	about: function(name) {
-		console.log(information[name] ?? "No additional information available.");
+		console.log(information[name] ?? "No additional information available!!!");
 	}
 };
