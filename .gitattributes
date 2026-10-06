@@ -1,0 +1,3 @@
+*.tsv diff=cr
+*.df1 binary
+*.omh -text
