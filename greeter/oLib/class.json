@@ -8,9 +8,9 @@
 	"ivardefs": [
 		{
 			"name": "ivAbout",
-			"type": "kList",
-			"subtype": "",
-			"sublen": 0
+			"type": "kCharacter",
+			"subtype": "kSimplechar",
+			"sublen": 100000000
 		}
 	],
 	"properties": {

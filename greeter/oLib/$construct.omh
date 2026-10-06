@@ -14,3 +14,5 @@ Do OJSON.$jsontolistorrow(lvJSON,lvError) Returns ivAbout
 If not(isclear(lvError))
 	Send to trace log Unable to parse about JSON: [lvError]
 End If
+
+Send to trace log All good!
