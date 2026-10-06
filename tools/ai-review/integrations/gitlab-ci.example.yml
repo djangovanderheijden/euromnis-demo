@@ -1,0 +1,36 @@
+# AI review for GitLab CI: review every commit pushed to the default branch and
+# open a GitLab issue for each commit with findings.
+#
+# Setup
+#   1. Copy review.py, models.json, prompt.txt and integrations/ into your
+#      repository, e.g. into tools/ai-review/ (the paths below assume that).
+#   2. Add this job to your .gitlab-ci.yml.
+#   3. Settings → CI/CD → Variables (mark secrets as "Masked"):
+#        GITLAB_API_TOKEN     project access token, role Reporter or higher, scope "api"
+#        OPENROUTER_API_KEY   when you use an OpenRouter model
+#        OLLAMA_BASE_URL      when you use your own Ollama server
+#        AI_REVIEW_MODEL      optional: which profile from models.json to use
+
+ai-review:
+  image: python:3.12            # includes git
+  rules:
+    # Only pushes to the default branch: every commit is reviewed once, when it lands.
+    # You can widen this rule to other branches, but then commits are reviewed
+    # again (and get another issue) when they are merged.
+    - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  variables:
+    GIT_DEPTH: 0                # full history, so the commit before this push is available
+  script:
+    - |
+      if git cat-file -e "${CI_COMMIT_BEFORE_SHA}^{commit}" 2>/dev/null; then
+        RANGE="$CI_COMMIT_BEFORE_SHA..$CI_COMMIT_SHA"   # every commit in this push
+      else
+        RANGE="$CI_COMMIT_SHA"                          # first push or force-push: the new tip only
+      fi
+      python3 tools/ai-review/review.py "$RANGE" --json report.json --markdown report.md
+    - python3 tools/ai-review/integrations/gitlab_issues.py report.json --assign-authors
+  artifacts:
+    when: always
+    paths:
+      - report.json
+      - report.md

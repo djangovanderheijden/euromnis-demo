@@ -1,0 +1,62 @@
+# AI review for GitHub Actions: review every commit pushed to the default branch
+# and open a GitHub issue for each commit with findings.
+#
+# Setup
+#   1. Copy review.py, models.json, prompt.txt and integrations/ into your
+#      repository, e.g. into tools/ai-review/ (the paths below assume that).
+#   2. Copy this file to .github/workflows/ai-review.yml.
+#   3. Settings → Secrets and variables → Actions → New repository secret:
+#        OPENROUTER_API_KEY   (or OLLAMA_BASE_URL for an Ollama server the runner can reach)
+#   4. Pick the model profile in AI_REVIEW_MODEL below.
+
+name: AI review
+
+on:
+  push:
+    # Only the default branch: every commit is reviewed once, when it lands.
+    # You can add more branches, but then commits are reviewed again (and get
+    # another issue) when they are merged.
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0        # full history, so the commit before this push is available
+
+      - name: Review the pushed commits
+        env:
+          AI_REVIEW_MODEL: deepseek-v4.1-flash-openrouter
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          if git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            RANGE="$BEFORE..$AFTER"   # every commit in this push
+          else
+            RANGE="$AFTER"            # first push or force-push: the new tip only
+          fi
+          python3 tools/ai-review/review.py "$RANGE" --json report.json --markdown report.md
+
+      - name: Create issues for findings
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/ai-review/integrations/github_issues.py report.json --assign-authors
+
+      - name: Add the report to the job summary
+        if: always()
+        run: cat report.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: ai-review-report
+          path: report.*
+          if-no-files-found: ignore

@@ -1,0 +1,62 @@
+{
+  "default": "deepseek-v4.1-flash-openrouter",
+  "settings": {
+    "prompt": "prompt.txt",
+    "time_limit": 600,
+    "max_diff_chars": 30000,
+    "max_tool_output_chars": 10000,
+    "request_timeout": 400,
+    "request_retries": 1
+  },
+  "models": {
+    "qwen3.6-27b-ollama": {
+      "api": "ollama",
+      "base_url": "${OLLAMA_BASE_URL:-http://localhost:11434}",
+      "api_key": "${OLLAMA_API_KEY:-}",
+      "request": {
+        "model": "qwen3.6:27b-coding-mxfp8",
+        "options": {
+          "num_ctx": 131072,
+          "seed": 1,
+          "temperature": 0.6,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 0.0,
+          "repeat_penalty": 1.0
+        }
+      }
+    },
+    "qwen3.6-27b-openrouter": {
+      "api": "openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "api_key": "${OPENROUTER_API_KEY}",
+      "request": {
+        "model": "qwen/qwen3.6-27b",
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "min_p": 0.0,
+        "presence_penalty": 0.0,
+        "repetition_penalty": 1.0
+      }
+    },
+    "claude-haiku-openrouter": {
+      "api": "openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "api_key": "${OPENROUTER_API_KEY}",
+      "request": {
+        "model": "~anthropic/claude-haiku-latest",
+        "reasoning": { "enabled": true }
+      }
+    },
+    "deepseek-v4.1-flash-openrouter": {
+      "api": "openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "api_key": "${OPENROUTER_API_KEY}",
+      "request": {
+        "model": "deepseek/deepseek-v4.1-flash"
+      }
+    }
+  }
+}
