@@ -1,0 +1,20 @@
+name: Check TODOs
+
+on:
+  push:
+
+jobs:
+  check-todos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check pushed changes for TODO comments
+        run: |
+          ./tools/check-todos.sh \
+            "${{ github.event.before }}" \
+            "${{ github.sha }}"
