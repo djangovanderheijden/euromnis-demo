@@ -1,0 +1,16 @@
+[
+	{
+		"name": "$construct",
+		"pvardefs": [
+
+		],
+		"lvardefs": [
+			{
+				"name": "lvCommand",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		]
+	}
+]

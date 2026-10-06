@@ -1,0 +1,19 @@
+{
+	"classtype": "kSystemtable",
+	"omnisversion": "12.0",
+	"properties": {
+		"componenttype": "kCompStoreHidden",
+		"createdate": "2026-10-05 11:53:22",
+		"desc": "",
+		"external": false,
+		"userinfo": "",
+		"version": ""
+	},
+	"fonts": [
+		"Roboto Flex,Sans-serif",
+		"system-ui,Sans-serif",
+		"Verdana,Arial,Helvetica,Sans-serif",
+		"Courier New,Monospace",
+		"Times New Roman,Georgia,Serif"
+	]
+}

@@ -1,0 +1,6 @@
+Calculate lvDescription as ivAbout.[low(pName)]
+If isclear(lvDescription)
+	Calculate lvDescription as "No additional information available."
+End If
+
+Quit method lvDescription

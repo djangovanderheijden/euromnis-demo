@@ -1,0 +1,16 @@
+If not(lvFile.$openfile(pAssetPath))
+	Send to trace log Unable to open asset file at [pAssetPath]
+	Quit method
+End If
+
+If not(lvFile.$readcharacter(kUniTypeUTF8,lvJSON))
+	Send to trace log Unable to read asset file at [pAssetPath]
+	Quit method
+End If
+
+Do lvFile.$closefile()
+
+Do OJSON.$jsontolistorrow(lvJSON,lvError) Returns ivAbout
+If not(isclear(lvError))
+	Send to trace log Unable to parse about JSON: [lvError]
+End If

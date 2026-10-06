@@ -1,0 +1,22 @@
+[
+	{
+		"name": "$construct",
+		"pvardefs": [
+
+		],
+		"lvardefs": [
+			{
+				"name": "lvLib",
+				"type": "kObject",
+				"subtype": "oLib",
+				"sublen": 0
+			},
+			{
+				"name": "lvName",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		]
+	}
+]

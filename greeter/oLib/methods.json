@@ -1,0 +1,67 @@
+[
+	{
+		"name": "$construct",
+		"pvardefs": [
+			{
+				"name": "pAssetPath",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000,
+				"initval": "con($clib.$parentfolder,\"assets\",pathsep(),\"about.json\")"
+			}
+		],
+		"lvardefs": [
+			{
+				"name": "lvError",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			},
+			{
+				"name": "lvFile",
+				"type": "kObject",
+				"subtype": ".FileOps.FileOps",
+				"sublen": 0
+			},
+			{
+				"name": "lvJSON",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		]
+	},
+	{
+		"name": "$greet",
+		"pvardefs": [
+			{
+				"name": "pName",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		],
+		"lvardefs": [
+
+		]
+	},
+	{
+		"name": "$about",
+		"pvardefs": [
+			{
+				"name": "pName",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		],
+		"lvardefs": [
+			{
+				"name": "lvDescription",
+				"type": "kCharacter",
+				"subtype": "kSimplechar",
+				"sublen": 100000000
+			}
+		]
+	}
+]

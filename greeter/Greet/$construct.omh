@@ -1,0 +1,9 @@
+Prompt for input Enter a name/Name please Returns lvName
+
+If isclear(lvName)
+	OK message Error {No name provided}
+	Quit method
+End If
+
+OK message [lvLib.$greet(lvName)] {[lvLib.$about(lvName)]}
+Do $cinst.$close()
