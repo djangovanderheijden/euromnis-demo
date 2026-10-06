@@ -1,5 +1,4 @@
 If not(lvFile.$openfile(pAssetPath))
-	# TODO: Clarify this error
 	Send to trace log Unable to open asset file at [pAssetPath]
 	Quit method
 End If
