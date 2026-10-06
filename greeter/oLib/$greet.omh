@@ -1,1 +1,2 @@
-Quit method con("Hello, ",pName,"!")
+Quit method "Test"
+# Quit method con("Hello, ",pName,"!")

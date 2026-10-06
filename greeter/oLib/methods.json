@@ -63,5 +63,14 @@
 				"sublen": 100000000
 			}
 		]
+	},
+	{
+		"name": "$test",
+		"pvardefs": [
+
+		],
+		"lvardefs": [
+
+		]
 	}
 ]

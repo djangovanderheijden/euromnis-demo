@@ -10,6 +10,8 @@ End If
 
 Do lvFile.$closefile()
 
+Send to trace log Hello, world
+
 Do OJSON.$jsontolistorrow(lvJSON,lvError) Returns ivAbout
 If not(isclear(lvError))
 	Send to trace log Unable to parse about JSON: [lvError]
