@@ -7,9 +7,5 @@ module.exports = {
 	
 	about: function(name) {
 		console.log("No additional information available.");
-	},
-
-	crash: function() {
-		fewfefewf
 	}
 };
