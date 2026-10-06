@@ -1,4 +1,4 @@
-// const information = require('../assets/about.json');
+const information = require('../assets/about.json');
 
 module.exports = {
 	greet: function(name) {
@@ -6,6 +6,6 @@ module.exports = {
 	},
 	
 	about: function(name) {
-		console.log("No additional information available.");
+		console.log(information[name] ?? "No additional information available.");
 	}
 };
