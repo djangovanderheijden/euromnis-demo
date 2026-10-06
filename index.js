@@ -8,4 +8,4 @@ if (args.length <= 0) {
 
 const name = args[0];
 greet(name);
-// about(name);
+about(name);
